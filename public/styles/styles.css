@@ -1,0 +1,12 @@
+label {
+    display: block;
+    margin: 5px 0;
+}
+
+#main {
+    width: 70%;
+    margin: 0 auto;
+    /*          x   y   blur-radius */
+    box-shadow: 5px 5px 5px gray;
+    padding: 10px;
+}

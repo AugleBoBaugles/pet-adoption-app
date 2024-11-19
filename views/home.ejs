@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Adoption Center</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <div id="main">
+        <form id="pet-form" method="post" action="success">
+            <h1>Adopt a pet here</h1>
+            <label>
+                What type of Pet would you like to adopt?
+                <select name="pets" id="type">
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="lizard">Lizard</option>
+                    <option value="snake">Snake</option>
+                    <option value="pig">Pig</option>
+                    <option value="hippogriff">Hippogriff</option>
+                </select>
+            </label>
+            <label>
+                Quantity:
+                <input name="quantity" type="text" id="quantity">
+            </label>
+            <label>
+                Color:
+                <input name="color" type="text" id="color"> 
+            </label>
+            <button id="click" type="submit">Submit Order</button>
+            <p id="output"></p>
+        </form>
+    </div>
+
+    
+</body>
+</html>
