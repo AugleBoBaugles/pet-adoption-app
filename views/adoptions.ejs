@@ -8,6 +8,15 @@
     <div id="main">
         <h1>Pet Adoptions</h1>
         <div class="pet">
+            <p>You ordered <%= data.quantity %> <%= data.color %>
+            <% if (data.quantity < 2) { %>
+                <%= data.pets %> 
+            <%} else { %>
+                <%= data.pets %>s
+            <% } %>
+            </p>
+
+            <hr>
             <p>Pet - <%= data.pets %></p>
             <p>Quantity - <%= data.quantity %></p>
             <p>Color - <%= data.color %></p>
