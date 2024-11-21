@@ -1,5 +1,23 @@
 // Get the express package 
 const express = require('express');
+const mariadb = require('mariadb');
+
+const pool = mariadb.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '**Password Here**',
+    database: 'pets'
+});
+
+async function connect() {
+    try {
+        const conn = await pool.getConnection();
+        console.log('Connected to the database');
+        return conn;
+    } catch (err) {
+        console.log('Error connecting to the database: ' + err);
+    }
+}
 
 // Instantiate an express (web) app
 const app = express();
@@ -22,13 +40,28 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.post('/success', (req, res) => {
+/* app.post('/success', async (req, res) => {
     res.render('adoptions',{data: req.body});
+}) */
+
+app.post('/confirm', async (req, res) => {
+    const data = req.body;
+    const conn = await connect();
+
+    await conn.query(
+        `INSERT INTO adoptions (pet_type, quantity, color) VALUES ('${data.pets}', ${data.quantity}, '${data.color}')`
+    );
+
+    res.render('confirmations', {details: data})
+});
+
+app.get('/adoptions', async (req, res) => {
+    const conn = await connect();
+    const results = await conn.query('SELECT * FROM adoptions ORDER BY date_submitted DESC');
+    
+    res.render('adoptions', { adoptions: results});
 })
 
-app.get('/adoptions', (req, res) => {
-    res.render('adoptions');
-})
 // Tell the app to listen for requests on the designated port
 app.listen(PORT, () => {
     console.log(`Server running on port http://localhost:${PORT}`)
